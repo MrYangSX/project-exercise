@@ -1,0 +1,20 @@
+Spring Security 
+	1）概念：Spring项目组中用来提供安全认证服务的框架。(应用级别的安全主要包含认证（Authentication）和授权（Authorization）)
+	2）核心功能主要包括：
+		1>认证 （你是谁）
+		2>授权 （你能干什么）
+		3>攻击防护 （防止伪造身份）
+		其核心就是一组过滤器链，项目启动后将会自动配置。最核心的就是 Basic Authentication Filter 用来
+		认证用户的身份，一个在spring security中一种过滤器处理一种认证方式。
+		4>过滤器链：1.请求 2.Basic Authentication Filter 3.其他认证过滤器 4.Exception Translation Filter
+					5.FilterSecurityInterceptor 6.REST API 7.响应
+		  1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
+		  1:用户发起的请求
+		  2:认证请求头中的Authorization信息
+		  3:其他的认证过滤器
+		  4:会抛出不同的异常（根据具体的原因）。Exception Translation Filter 会捕获抛出的错误，
+		    然后根据不同的认证方式进行信息的返回提示（可手动控制是否）
+		  5:判定该请求是否能进行访问rest服务（判断的依据是 BrowserSecurityConfig中的配置）
+		  6:rest服务api
+		  7:返回rest服务api结果
+	3）
