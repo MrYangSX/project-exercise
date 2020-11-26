@@ -1,4 +1,4 @@
-package com.ysx.modules.security.domain;
+package com.ysx.modules.test.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

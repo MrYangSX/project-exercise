@@ -1,9 +1,9 @@
-package com.ysx.modules.security.service;
+package com.ysx.modules.test.service;
 
 import java.util.List;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ysx.modules.security.domain.Test;
+import com.ysx.modules.test.domain.Test;
 
 /**
  * <p>

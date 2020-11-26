@@ -1,7 +1,7 @@
-package com.ysx.modules.security.mapper;
+package com.ysx.modules.test.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ysx.modules.security.domain.Test;
+import com.ysx.modules.test.domain.Test;
 
 /**
  * <p>

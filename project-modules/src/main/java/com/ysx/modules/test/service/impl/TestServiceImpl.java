@@ -1,9 +1,9 @@
-package com.ysx.modules.security.service.impl;
+package com.ysx.modules.test.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ysx.modules.security.domain.Test;
-import com.ysx.modules.security.mapper.TestMapper;
-import com.ysx.modules.security.service.TestService;
+import com.ysx.modules.test.domain.Test;
+import com.ysx.modules.test.mapper.TestMapper;
+import com.ysx.modules.test.service.TestService;
 
 import java.util.List;
 
