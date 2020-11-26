@@ -1,0 +1,6 @@
+pom文件：
+	1）<relativePath>maven首先从当前构建项目开始查找父项目的pom文件，然后从本地仓库，最后从远程仓库。
+		RelativePath允许你选择一个不同的位置。
+		（../pom.xml 没找到父元素的pom ，不配置 relativePath 指向父项目的pom则会报错）
+	2）<dependencyManagement> 对所依赖的jar包的版本进行管理，不会导入jar（常用多模块父类版本统一管理）
+	
