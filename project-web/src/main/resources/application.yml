@@ -1,0 +1,31 @@
+server:
+  port: 8000
+  max-http-header-size: 10240
+  servlet:
+    context-path: /api
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: xmlx
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource 
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.0.0.1:3306/security_basics?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: juan940423
+
+
+mybatis-plus:
+  #xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）  
+  mapper-locations: classpath*:/mappers/*.xml
+  #MyBaits 别名包扫描路径，通过该属性可以给包中的类注册别名
+  type-aliases-package: com.ysx.*.domain
+  global-config:
+    # 逻辑删除配置
+    db-config:
+      # 删除前
+      logic-not-delete-value: 1
+      # 删除后
+      logic-delete-value: 0
