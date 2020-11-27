@@ -1,0 +1,29 @@
+异常有一个共同的祖先Throwable
+	两个重要的子类：
+	1>Error：Error代表的错误是程序无法处理的，这表示程序中出现了严重的问题，
+	     比如OutOfMemoryError、ThreadDeath，当出现这些错误，JVM一般会选择线程终止，
+	     因为他们超出了应用程序控制和处理的能力之外。是程序无法处理的异常，应用程序不会抛出该类对象。
+	2>Exception：Exception代表的异常是程序可以处理的。是程序本身可以处理的异常，应尽可能去处理这些异常。
+		Exception一般分为RuntimeException及其子类和此外的CheckedException及其子类两部分。
+		a.运行时异常RuntimeException：是那些可能在Java 虚拟机正常运行期间抛出的异常的超类。
+			这种错误是由程序员引起的错误，可以修正代码解决。
+			比如NullPointerException，这些异常是不可查异常，也就是程序中可以选择捕获处理，也可以不处理；
+		b.非运行时异常CheckedException：这部分比如SQLException是可查异常，也即是必须捕获处理或者向上抛出。
+		 	一般是外部错误，这种异常都发生在编译阶段，Java编译器会强制程序去捕获此类异常
+	用@ControllerAdvice+@ExceptionHandler实现全局异常处理:
+		通常在Controller层需要去捕获service层的异常，防止返回一些不友好的错误信息到客户端，
+	但如果Controller层每个方法都用模块化的try-catch代码去捕获异常，会很难看也难维护。
+	
+	异常处理最好是解耦的，并且都放在一个地方集中管理。Spring能够较好的处理这种问题，核心如下，
+	这里主要关注前两个：
+		@ExceptionHandler：统一处理某一类异常，从而能够减少代码重复率和复杂度
+		@ControllerAdvice：异常集中处理，更好的使业务逻辑与异常处理剥离开
+		@ResponseStatus：可以将某种异常映射为HTTP状态码
+	
+		单使用@ExceptionHandler，只能在当前Controller中处理异常，与@ControllerAdvice组合使用，
+	则可以实现全局异常处理，不用每个controller都配置
+	
+	原理梳理
+		初始化时会找到实现了 GlobalHandelException 接口的类，将它实例化并注册到 IOC 容器中。
+		在初始化 bean 时，如果是一个异常处理器则会将他单独存放（也就相当于前文说的打标识）。
+		当发生异常时从容器中获取到异常处理器的对象，执行其中的处理函数即可。
