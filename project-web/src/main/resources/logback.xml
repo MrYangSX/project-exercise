@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="false">
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<!-- Log file path-->
+    <property name="log.path" value="${logPath:-${java.io.tmpdir:-.}}/logs" />
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{MM-dd HH:mm:ss.SSS} %clr(%-5p) %clr([%-39logger{39}]){cyan} - %m%n%wEx</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.path}/debug.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${log.path}/debug.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+			<maxFileSize>50MB</maxFileSize>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p ${PID:- } [%15.15t] [%-39logger{39}] - %m%n%wEx</pattern>
+		</encoder>
+		<!--<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>DENY</onMatch>
+			<onMismatch>NEUTRAL</onMismatch>
+		</filter>-->
+	</appender>
+    
+	<!-- Log file error output -->
+	<appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.path}/error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${log.path}/error.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+			<maxFileSize>50MB</maxFileSize>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p ${PID:- } [%15.15t] [%-39logger{39}] - %m%n%wEx</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+	</appender>
+
+    <root level="info">
+        <appender-ref ref="console" />
+		<appender-ref ref="debug" />
+		<appender-ref ref="error" />
+    </root>
+	<!-- Project level setting -->
+	<logger name="org.springframework.boot.web.embedded" level="INFO" />
+	<logger name="org.springframework.context.support" level="INFO" />
+	<logger name="org.mybatis.spring.transaction" level="WARN" />
+	<logger name="tk.mybatis.mapper.autoconfigure" level="WARN" />
+	<logger name="io.undertow.websockets.jsr" level="ERROR" />
+	<!-- 
+	<logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="trace" />
+	 -->
+	<logger name="com.ysx" level="info" />
+</configuration>

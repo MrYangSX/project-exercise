@@ -3,8 +3,12 @@ package com.ysx.modules.test.controller;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -28,14 +32,10 @@ public class TestController {
 	TestServiceImpl testServiceImpl;
 	
 	@GetMapping("/test01")
-	public void test() {
-		System.out.println("test01");
-	}
-	
-	@GetMapping("/test02")
 	public void test2() {
 		List<Test> data = testServiceImpl.findMpTests();
 		System.out.println(data);
 	}
+	
 }
 

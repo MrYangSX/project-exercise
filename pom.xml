@@ -21,10 +21,10 @@
 		<dependencies>
 			
 			<dependency>
-	            <groupId>com.alibaba</groupId>
-	            <artifactId>druid</artifactId>
-	            <version>1.0.20</version>
- 			</dependency>
+		        <groupId>com.alibaba</groupId>
+		        <artifactId>druid-spring-boot-starter</artifactId>
+		        <version>1.1.17</version>
+		    </dependency>
  		
 	 		<!--MyBatis-Plus（crud） start -->
 			<dependency>
@@ -33,6 +33,18 @@
 	            <version>3.2.0</version>
 	        </dependency>
 	        
+	        <dependency>
+			    <groupId>com.github.pagehelper</groupId>
+			    <artifactId>pagehelper-spring-boot-starter</artifactId>
+			    <version>1.2.12</version>
+			</dependency>
+	        
+	        <dependency>
+				<groupId>com.jfinal</groupId>
+				<artifactId>jfinal</artifactId>
+				<version>3.8</version>
+			</dependency>
+			
 	        <!-- 代码生成器依赖 start -->
 	        <dependency>
 	            <groupId>com.baomidou</groupId>
@@ -54,7 +66,19 @@
 			    <artifactId>spring-boot-starter-security</artifactId>
 			    <version>2.3.4.RELEASE</version>
 			</dependency>
-        
+         
+			<dependency>
+			    <groupId>org.springframework.boot</groupId>
+			    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+			    <version>2.3.4.RELEASE</version>
+			</dependency>
+        	
+        	<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt</artifactId>
+				<version>0.9.1</version>
+			</dependency>
+        	
         	<!-- lombok 自动装配 -->
 			<dependency>
 			    <groupId>org.projectlombok</groupId>
@@ -75,6 +99,37 @@
 				<version>${project.parent.version}</version>
 			</dependency>
 			
+			<dependency>
+				<groupId>com.ysx</groupId>
+				<artifactId>project-common</artifactId>
+				<version>${project.parent.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.ysx</groupId>
+				<artifactId>project-core</artifactId>
+				<version>${project.parent.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	
+  	<profiles>
+		
+		<!-- 编译项目 -->
+		<profile>
+			<id>build</id>
+			<properties>
+				<profileActive>build</profileActive>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>project-common</module>
+				<module>project-core</module>
+				<module>project-modules</module>
+				<module>project-web</module>
+			</modules>
+		</profile>
+	</profiles>
 </project>

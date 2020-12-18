@@ -5,27 +5,64 @@ server:
     context-path: /api
   tomcat:
     uri-encoding: UTF-8
-
+logging:
+    level:
+      com.ysx.modules.*.mapper: DEBUG
 spring:
   application:
     name: xmlx
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource 
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://172.0.0.1:3306/project_exercise?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/project_exercise?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: juan940423
-
-
+#    druid:
+#      initial-size: 10
+#      max-active: 500
+#      min-idle: 10
+#      max-wait: 60000
+#      pool-prepared-statements: true
+#      max-pool-prepared-statement-per-connection-size: 20
+#      validation-query: SELECT 'x'
+#      test-on-borrow: false
+#      test-on-return: false
+#      test-while-idle: true
+#      time-between-eviction-runs-millis: 60000
+#      min-evictable-idle-time-millis: 300000
+#      filters: stat,wall
+  security:
+    basic:
+      enabled: false
+#    user:
+#      name: admin
+#      password: admin
+#    filter:
+#      excludePathPatterns: >
+#       /test/**
+                
+            
 mybatis-plus:
   #xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）  
   mapper-locations: classpath*:/mappers/*.xml
   #MyBaits 别名包扫描路径，通过该属性可以给包中的类注册别名
   type-aliases-package: com.ysx.*.domain
-  global-config:
-    # 逻辑删除配置
-    db-config:
-      # 删除前
-      logic-not-delete-value: 1
-      # 删除后
-      logic-delete-value: 0
+#  global-config:
+#    # 逻辑删除配置
+#    db-config:
+#      # 删除前
+#      logic-not-delete-value: 1
+#      # 删除后
+#      logic-delete-value: 0
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: false
+  supportMethodsArguments: false
+  params: count=countSql
+
+jwt:
+  secret: secret
+  expiration: 7200000
+  token: Authorization
+ 
