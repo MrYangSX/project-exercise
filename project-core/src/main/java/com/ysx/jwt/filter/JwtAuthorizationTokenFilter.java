@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ysx.jwt;
+package com.ysx.jwt.filter;
 
 import java.io.IOException;
 
@@ -18,6 +18,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.ysx.jwt.JwtTokenUtil;
 
 import io.jsonwebtoken.ExpiredJwtException;
 

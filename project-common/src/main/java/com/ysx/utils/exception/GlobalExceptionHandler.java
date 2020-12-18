@@ -28,21 +28,21 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(ServiceException.class)
 	public ResultReturn<String> handlerServiceException(ServiceException e){
 		log.error("业务异常:{}",e.getMessage());
-        return new ResultReturn<String>(false, Integer.getInteger(e.getCode()), null, e.getMessage(), null);
+        return ResultReturn.buildFailure(Integer.getInteger(e.getCode()), e.getMessage());
 	}
 	
 	//运行时异常
 	public ResultReturn<String> processRuntimeException(RuntimeException e) {
         e.printStackTrace();
         log.error("运行时异常:{}",e.getMessage());
-        return new ResultReturn<String>(false, ExceptionStatus.ERROR.getCode(), ExceptionStatus.ERROR.getMsg(), e.getMessage(), null);
+        return ResultReturn.buildFailure(ExceptionStatus.ERROR.getCode(), e.getMessage());
     }
 	
 	//系统异常
 	@ExceptionHandler(Exception.class)
 	public ResultReturn<String> handlerException(Exception e){
 		log.error(e.getMessage(), e);
-        return new ResultReturn<String>(false, 500, "网络异常", e.getMessage(), null);
+        return ResultReturn.buildFailure(500, e.getMessage());
 	}
 
 }

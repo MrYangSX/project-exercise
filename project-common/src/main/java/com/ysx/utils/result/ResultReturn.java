@@ -33,11 +33,6 @@ public class ResultReturn<T> implements Serializable{
 	private String message;
 
 	/**
-	 *	 消息描述
-	 */
-	private String message_description;
-
-	/**
 	 *	 结果数据
 	 */
 	private T data;
@@ -50,14 +45,18 @@ public class ResultReturn<T> implements Serializable{
 	public ResultReturn() {
 	}
 	
-	public ResultReturn(Boolean success, Integer code, String message, String message_description, T data) {
+	public ResultReturn(Boolean success, Integer code, String message, T data) {
         this.success = success;
         this.message = message;
-        this.message_description = message_description;
         this.code = code;
         this.data = data;
     }
-
+	
+	public ResultReturn(Boolean success, Integer code, T data) {
+        this.success = success;
+        this.code = code;
+        this.data = data;
+    }
 	
 	/**
 	 * 	 构建返回结果
@@ -68,8 +67,21 @@ public class ResultReturn<T> implements Serializable{
 	 * @param data
 	 * @return
 	 */
-	public static <T> ResultReturn<T> build(Boolean success, Integer code, String message, String message_description, T data){
-		return new ResultReturn<T>(success, code, message, message_description, data);
+	public static <T> ResultReturn<T> build(Boolean success, Integer code, String message, T data){
+		return new ResultReturn<T>(success, code, message, data);
+    }
+	
+	/**
+	 * 	 构建返回结果
+	 * @param success
+	 * @param code
+	 * @param message
+	 * @param message_description
+	 * @param data
+	 * @return
+	 */
+	public static <T> ResultReturn<T> build(Boolean success, Integer code, T data){
+		return new ResultReturn<T>(success, code, data);
     }
 	
     /**
@@ -79,7 +91,7 @@ public class ResultReturn<T> implements Serializable{
      * @return
      */
     public static <T> ResultReturn<T> buildSuccess(String message, T data) {
-        return build(Boolean.TRUE, 0, message, null, data);
+        return build(Boolean.TRUE, 0, message, data);
     }
     
     /**
@@ -88,16 +100,7 @@ public class ResultReturn<T> implements Serializable{
      * @return
      */
     public static <T> ResultReturn<T> buildSuccess(T data){
-        return buildSuccess(null, data);
-    }
-    
-    /**
-     * 	构建成功消息
-     * @param message
-     * @return
-     */
-    public static <T> ResultReturn<T> buildSuccess(String message){
-        return buildSuccess(message, null);
+        return build(Boolean.TRUE, 0, data);
     }
     
     /**
@@ -107,8 +110,8 @@ public class ResultReturn<T> implements Serializable{
      * @param message_description
      * @return
      */
-    public static <T> ResultReturn<T> buildFailure(Integer code, String message, String message_description){
-        return build(Boolean.FALSE, code, message, message_description, null);
+    public static <T> ResultReturn<T> buildFailure(Integer code, String message){
+        return build(Boolean.FALSE, code, message, null);
     }
     
     /**
@@ -119,17 +122,7 @@ public class ResultReturn<T> implements Serializable{
      * @return
      */
     public static <T> ResultReturn<T> buildFailure(Integer code, String message, T data){
-        return build(Boolean.FALSE, code, message, null, data);
-    }
-    
-    /**
-     * 	构建失败消息
-     * @param code
-     * @param message
-     * @return
-     */
-    public static <T> ResultReturn<T> buildFailure(Integer code, String message){
-        return build(Boolean.FALSE, code, message, null, null);
+        return build(Boolean.FALSE, code, message, data);
     }
     
     /**
@@ -139,6 +132,6 @@ public class ResultReturn<T> implements Serializable{
      * @return
      */
     public static <T> ResultReturn<T> buildFailure(String message){
-        return build(Boolean.FALSE, null, message, null, null);
+        return build(Boolean.FALSE, null, message, null);
     }
 }

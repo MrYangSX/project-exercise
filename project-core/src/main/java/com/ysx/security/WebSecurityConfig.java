@@ -17,7 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.ysx.jwt.JwtAuthorizationTokenFilter;
+import com.ysx.jwt.filter.JwtAuthorizationTokenFilter;
 
 
 /**
@@ -35,8 +35,6 @@ import com.ysx.jwt.JwtAuthorizationTokenFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
-//	@Autowired
-//	UserDetailsServiceImpl userDetailsService;
 	@Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Autowired
@@ -62,7 +60,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
-
 	
 	/**
      *封装身份认证提供者
@@ -104,44 +101,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			.formLogin().and()
 			.httpBasic()
 			.and()
-			.addFilterBefore(jwtAuthorizationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-//		    .addFilter(new JWTLoginFilter(authenticationManager()))
-//		    .addFilter(new JWTAuthenticationFilter(authenticationManager()));
-				//配置路径拦截，表明路径访问所对应的权限，角色，认证信息。
-//				.authorizeRequests()
-//		        .antMatchers("/", "/api/home").permitAll()
-//		        .antMatchers("/api/sys/admin/**").hasRole("ROLE_ADMIN")
-//		        .antMatchers("/api/sys/user/**").hasRole("ROLE_USER")
-//		        .anyRequest().authenticated()
-//		        .and()
-//		    .formLogin()
-//		    	//指定“/login”该路径为登录页面
-//		    	//当未认证的用户尝试访问任何受保护的资源时，都会跳转到“/login”。
-//		        .loginPage("/login")
-//		        //指定“/error”为错误页面，当有异常抛出时，跳转到“/error”。
-//		        .failureUrl("/error")
-//		        .permitAll()
-//		        .and()
-//	        //默认指定“/logout”为注销页面。
-//		    .logout()
-//		        .permitAll();	
-			//禁用 csrf
-//			.csrf()
-//				.disable()
-//				.cors()
-//				.and()
-//			.authorizeRequests()
-////				.requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-//				//  /login 允许所有人访问
-//				.antMatchers(HttpMethod.POST, "/login").permitAll()
-//				.anyRequest().authenticated()
-//				.and()
-//			// 定义当需要用户登录时候，转到的登录页面
-//			.formLogin()
-//				.and()
-//			//禁用http-basic方式(认证弹窗)
-//			.httpBasic().disable()
-//			.logout().permitAll();
+			.addFilterBefore(jwtAuthorizationTokenFilter, UsernamePasswordAuthenticationFilter.class);		 
 	}
 	
 }
