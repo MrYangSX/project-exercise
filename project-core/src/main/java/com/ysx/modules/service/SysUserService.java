@@ -17,6 +17,17 @@ public interface SysUserService extends IService<SysUser> {
 
 	/**
 	 * 
+	 * todo : 用户分页列表
+	 *
+	 * @param userName（模糊查询）
+	 * @return
+	 * @author yangShiXiong
+	 * @Data 2020年12月18日
+	 */
+	public List<SysUser> findSysUsers(String userName);
+	
+	/**
+	 * 
 	 * todo : 根据用户id查询用户信息
 	 *
 	 * @param userName
@@ -58,12 +69,13 @@ public interface SysUserService extends IService<SysUser> {
 	
 	/**
 	 * 
-	 * todo : 用户分页列表
+	 * todo : 删除用户
 	 *
-	 * @param userName（模糊查询）
+	 * @param userIds
 	 * @return
 	 * @author yangShiXiong
-	 * @Data 2020年12月18日
+	 * @Data 2020年12月22日
 	 */
-	public List<SysUser> findSysUsers(String userName);
+	public int deleteUser(List<String> userIds);
+	
 }

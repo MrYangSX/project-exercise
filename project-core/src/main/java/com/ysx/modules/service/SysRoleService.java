@@ -1,5 +1,7 @@
 package com.ysx.modules.service;
 
+import java.util.List;
+
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ysx.modules.domain.SysRole;
 
@@ -35,6 +37,17 @@ public interface SysRoleService extends IService<SysRole> {
 	
 	/**
 	 * 
+	 * todo : 根据角色id集合查询角色信息
+	 *
+	 * @param roleIds
+	 * @return
+	 * @author yangShiXiong
+	 * @Data 2020年12月22日
+	 */
+	public List<SysRole> getSysRoleByRIds(List<String> roleIds);
+	
+	/**
+	 * 
 	 * todo : 保存角色
 	 *
 	 * @param role
@@ -43,4 +56,15 @@ public interface SysRoleService extends IService<SysRole> {
 	 * @Data 2020年12月10日
 	 */
 	public int saveSysRole(SysRole role);
+	
+	/**
+	 * 
+	 * todo : 根据权限id查询对应角色信息
+	 *
+	 * @param permissionId
+	 * @return
+	 * @author yangShiXiong
+	 * @Data 2020年12月22日
+	 */
+	public List<SysRole> findSysRolesByPId(String permissionId);
 }

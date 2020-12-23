@@ -55,7 +55,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		if (!ObjectUtil.isEmpty(rIds)) {
 			for (String rId : rIds) {
 				SysRole sysRole = sysRoleService.getSysRoleByRId(rId);
-				authorities.add(new SimpleGrantedAuthority(sysRole.getRoleName()));
+				authorities.add(new SimpleGrantedAuthority(sysRole.getRoleNameEn()));
 			}
 		}
 		/**

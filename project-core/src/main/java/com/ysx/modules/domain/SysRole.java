@@ -3,6 +3,8 @@ package com.ysx.modules.domain;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -25,8 +27,10 @@ public class SysRole implements Serializable {
 
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
-
-    private String roleName;
-
-
+    //角色中文名称
+    private String roleNameCn;
+    //角色英文名称
+    private String roleNameEn;
+    
+    private List<SysPermission> permissions;
 }

@@ -33,6 +33,17 @@ public class SysUserController {
 	@Resource
 	private SysUserService sysUserService;
 	
+	/**
+	 * 
+	 * todo : 用户分页列表
+	 *
+	 * @param userName(模糊查询字段)
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 * @author yangShiXiong
+	 * @Data 2020年12月23日
+	 */
 	@GetMapping("/find")
 	public ResultReturn<Object> findSysUsers(String userName, Integer pageNum, Integer pageSize) {
 		

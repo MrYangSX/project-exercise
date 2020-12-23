@@ -9,6 +9,12 @@ import com.ysx.utils.lang.ObjectUtil;
 import com.ysx.utils.lang.StringUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -38,9 +44,20 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 		return this.baseMapper.selectById(roleId);
 	}
 	
+	public List<SysRole> getSysRoleByRIds(List<String> roleIds) {
+		if (roleIds.size() > 0) {
+			
+			QueryWrapper<SysRole> queryWrapper = new QueryWrapper<SysRole>();
+			queryWrapper.in("role_id",roleIds);
+			
+			return this.baseMapper.selectList(queryWrapper);
+		}
+		return null;
+	}
+	
 	public int saveSysRole(SysRole role) {
 		String roleId = role.getId();
-		String roleName = role.getRoleName();
+		String roleName = role.getRoleNameCn();
 		
 		if (StringUtil.isBlank(roleName)) {
 			throw new ServiceException(ExceptionStatus.ERROR_ARG.getCode()+"", ExceptionStatus.ERROR_ARG.getMsg());
@@ -60,5 +77,28 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 		
 		//insert
 		return this.baseMapper.insert(role);
+	}
+	
+	public List<SysRole> findSysRolesByPId(String permissionId){
+		List<SysRole> list = new ArrayList<SysRole>();
+		
+		StringBuffer sBuffer = new StringBuffer();
+		sBuffer.append("SELECT r.id AS id, r.role_name_cn AS roleNameCn, r.role_name_en AS roleNameEn");
+		sBuffer.append("FROM sys_role r ");
+		sBuffer.append("LEFT JOIN sys_permission_role pr ON r.id = pr.role_id ");
+		sBuffer.append("WHERE pr.permission_id = ?");
+		
+		List<Record> records = Db.find(sBuffer.toString(), permissionId);
+		if (records.size() > 0) {
+			for (Record r : records) {
+				SysRole sysRole = new SysRole();
+				sysRole.setId(r.getStr("id"));
+				sysRole.setRoleNameCn(r.getStr("roleNameCn"));
+				sysRole.setRoleNameEn(r.getStr("roleNameEn"));
+				
+				list.add(sysRole);
+			}
+		}
+		return list;
 	}
 }

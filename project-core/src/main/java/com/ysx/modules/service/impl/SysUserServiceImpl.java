@@ -28,6 +28,15 @@ import org.springframework.util.Assert;
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 
+	public List<SysUser> findSysUsers(String userName) {
+		QueryWrapper<SysUser> queryWrapper = new QueryWrapper<SysUser>();
+		if (StringUtil.isNotBlank(userName)) {
+			queryWrapper.like("user_name", userName);
+		}
+		
+		return this.baseMapper.selectList(queryWrapper);
+	}
+	
 	public SysUser getSysUserByUId(String userId) {
 		if (ObjectUtil.isEmpty(userId)) {
 			Assert.notNull(userId, "用户编码不能为空");
@@ -86,14 +95,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		return this.insertUser(user);
 	}
 	
-	public List<SysUser> findSysUsers(String userName) {
-		QueryWrapper<SysUser> queryWrapper = new QueryWrapper<SysUser>();
-		if (StringUtil.isNotBlank(userName)) {
-			queryWrapper.eq("user_name", userName);
-		}
-		
-		return this.baseMapper.selectList(queryWrapper);
-	}
+	public int deleteUser(List<String> userIds) {
 	
+		return this.baseMapper.deleteBatchIds(userIds);
+	}
 	
 }

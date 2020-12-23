@@ -31,6 +31,11 @@ spring:
 #      time-between-eviction-runs-millis: 60000
 #      min-evictable-idle-time-millis: 300000
 #      filters: stat,wall
+  # 格式化时间
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    
   security:
     basic:
       enabled: false
