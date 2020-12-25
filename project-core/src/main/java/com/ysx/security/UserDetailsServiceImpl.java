@@ -20,11 +20,14 @@ import com.ysx.modules.service.SysUserRoleService;
 import com.ysx.modules.service.SysUserService;
 import com.ysx.utils.lang.ObjectUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 
  * @author yangShiXiong
  * @Data 2020年11月30日
  */
+@Slf4j
 @Configuration
 public class UserDetailsServiceImpl implements UserDetailsService{
 
@@ -41,6 +44,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
+		log.info("进入Security认证");
 		
 		//查询user
 		SysUser sysUser = sysUserService.getSysUserByUName(username);
@@ -76,7 +80,9 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		 *  boolean isEnabled();)
 		 */
 		// 返回UserDetails实现类(添加角色完成)
-		User user = new User(sysUser.getUserName(), sysUser.getPassword(), authorities);
+		User user = new User(sysUser.getUsername(), sysUser.getPassword(), authorities);
+		
+		log.info("Security认证成功");
 		return user;
 	}
 

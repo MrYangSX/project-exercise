@@ -5,9 +5,11 @@ server:
     context-path: /api
   tomcat:
     uri-encoding: UTF-8
+    
 logging:
     level:
       com.ysx.modules.*.mapper: DEBUG
+      
 spring:
   application:
     name: xmlx
@@ -35,6 +37,18 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  
+  thymeleaf:
+    #缓冲的配置
+    cache: false
+    check-template: true
+    check-template-location: true
+    #开启MVC thymeleaf 视图解析
+    enabled: true
+    encoding: utf-8
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
     
   security:
     basic:
@@ -45,6 +59,10 @@ spring:
 #    filter:
 #      excludePathPatterns: >
 #       /test/**
+#  thymeleaf:
+#    cache: false #关闭缓存
+#    mode: HTML5 #设置模板类型
+#    encoding: utf-8  #设置编码
                 
             
 mybatis-plus:

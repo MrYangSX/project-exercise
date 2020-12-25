@@ -51,12 +51,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		}
 		
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<SysUser>();
-        queryWrapper.eq("user_name", userName);
+        queryWrapper.eq("username", userName);
 		return this.baseMapper.selectOne(queryWrapper);
 	}
 	
 	public int insertUser(SysUser user) {
-		String userName = user.getUserName();
+		String userName = user.getUsername();
 		String password = user.getPassword();
 		
 		//查询用户名是否已存在

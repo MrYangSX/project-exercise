@@ -1,25 +1,36 @@
 package com.ysx.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ysx.modules.domain.SysUser;
 import com.ysx.modules.service.SysUserService;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
  * @author yangShiXiong
  * @Data 2020年12月2日
  */
-@RestController
+@Slf4j
+@Controller("/test")
 public class SecurityTestController {
 	
 	@Autowired
 	SysUserService sysUserService;
 
+	@RequestMapping("/login")
+	public String login() {
+		log.info("进入登陆页");
+		
+        return "login.html";
+    }
+	
 	@GetMapping(value = "/home")
 	public String hello() {
 		return "Hello, spring security!";

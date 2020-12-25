@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Transient;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -33,7 +35,7 @@ public class SysUser implements Serializable {
     /**
      * 登录账户
      */
-    private String userName;
+    private String username;
 
     /**
      * 登录密码
@@ -48,5 +50,6 @@ public class SysUser implements Serializable {
     /**
      * 角色集合
      */
-    private List<SysRole> roles;
+//    @Transient
+//    private List<SysRole> roles;
 }

@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Transient;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -32,5 +34,6 @@ public class SysRole implements Serializable {
     //角色英文名称
     private String roleNameEn;
     
+    @Transient
     private List<SysPermission> permissions;
 }
